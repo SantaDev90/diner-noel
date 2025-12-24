@@ -30,11 +30,11 @@
         }
 
         header {
-            padding: 40px 20px 20px;
+            padding: 90px 20px 20px; /* top augmenté pour descendre le h1 sous les boutons */
             text-align: center;
         }
 
-        /* ✅ Correction : titre adaptatif sur une seule ligne */
+        /* titre adaptatif sur une seule ligne */
         header h1 {
             margin: 0;
             font-size: clamp(1.8rem, 5vw, 2.3rem); /* taille adaptable */
@@ -47,7 +47,6 @@
             text-shadow: 0 0 15px #ffd700;
         }
 
-        /* 🎵 MUSIQUE */
         .music-box {
             position: fixed;
             top: 20px;
@@ -189,7 +188,7 @@
             to { transform: translateY(100vh); }
         }
 
-        /* 📱 MOBILE : titre adaptatif */
+        /* MOBILE : titre adaptatif */
         @media (max-width: 600px) {
             header h1 {
                 font-size: clamp(1.4rem, 5vw, 1.8rem);
