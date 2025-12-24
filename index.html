@@ -44,6 +44,7 @@ header.night h1 {
     text-shadow: 0 0 5px #ffd700, 0 0 10px #ffd700, 0 0 20px #ffd700;
 }
 
+/* Music box - coin supérieur gauche */
 .music-box {
     position: fixed;
     top: 20px;
@@ -51,9 +52,11 @@ header.night h1 {
     display: flex;
     gap: 6px;
     z-index: 1000;
+    max-width: calc(50% - 40px); /* limite largeur sur mobile */
 }
 
 .music-box button {
+    flex-shrink: 0;
     padding: 8px 10px;
     border-radius: 10px;
     border: none;
@@ -79,6 +82,9 @@ body.night .music-box button {
     padding: 8px 10px;
     cursor: pointer;
     transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease, color 0.3s ease;
+    max-width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 body.night .music-box select {
@@ -90,6 +96,26 @@ body.night .music-box select {
 
 .music-box select:hover {
     transform: scale(1.05);
+}
+
+/* Bouton mode nuit - coin supérieur droit */
+.night-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 10px 15px;
+    border-radius: 12px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    background: var(--btn-day);
+    color: white;
+    z-index: 1000;
+}
+
+body.night .night-toggle {
+    background: var(--btn-night);
+    color: #000;
 }
 
 main {
@@ -157,24 +183,6 @@ body.night li {
     font-weight: 550;
 }
 
-.night-toggle {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    padding: 10px 15px;
-    border-radius: 12px;
-    border: none;
-    font-weight: bold;
-    cursor: pointer;
-    background: var(--btn-day);
-    color: white;
-}
-
-body.night .night-toggle {
-    background: var(--btn-night);
-    color: #000;
-}
-
 .snowflake {
     position: fixed;
     top: -10px;
@@ -198,6 +206,7 @@ body.night .night-toggle {
 </head>
 <body>
 
+<!-- Boutons coin supérieur gauche -->
 <div class="music-box">
     <button id="musicBtn">▶️</button>
     <select id="musicSelect">
@@ -206,10 +215,12 @@ body.night .night-toggle {
     </select>
 </div>
 
+<!-- Titre -->
 <header id="header">
     <h1>🎄 Repas de Noël 2025 🎄</h1>
 </header>
 
+<!-- Bouton coin supérieur droit -->
 <button class="night-toggle" id="nightBtn">🌙 Mode Nuit</button>
 
 <main>
