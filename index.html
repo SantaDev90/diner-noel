@@ -1,203 +1,201 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <title>Repas de Noël</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<title>Repas de Noël</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Police festive -->
+<link href="https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+    --primary: #000000;
+    --h2-color: #0b3d0b;
+    --card: #ffffff;
+    --text: #333;
+    --btn-day: #0b3d0b;
+    --btn-night: #ffd700;
+}
 
-    <!-- Police festive -->
-    <link href="https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@400;700&display=swap" rel="stylesheet">
+body {
+    margin: 0;
+    font-family: "Segoe UI", Roboto, Arial, sans-serif;
+    color: var(--text);
+    overflow-x: hidden;
+    transition: background 0.5s, color 0.5s;
+    background: radial-gradient(circle at top, rgba(255,255,255,0.25), transparent 40%), linear-gradient(180deg, #7a0c18 0%, #b11226 40%, #1f7a5c 100%);
+}
 
-    <style>
-        :root {
-            --primary: #000000;
-            --h2-color: #0b3d0b;
-            --card: #ffffff;
-            --text: #333;
-            --btn-day: #0b3d0b;
-            --btn-night: #ffd700;
-        }
+header {
+    padding: 90px 20px 20px; /* descend le h1 sous les boutons */
+    text-align: center;
+}
 
-        body {
-            margin: 0;
-            font-family: "Segoe UI", Roboto, Arial, sans-serif;
-            color: var(--text);
-            overflow-x: hidden;
-            transition: background 0.5s, color 0.5s;
-            background:
-                radial-gradient(circle at top, rgba(255,255,255,0.25), transparent 40%),
-                linear-gradient(180deg, #7a0c18 0%, #b11226 40%, #1f7a5c 100%);
-        }
+/* titre adaptatif sur une seule ligne */
+header h1 {
+    margin: 0;
+    font-size: clamp(2rem, 6vw, 2.5rem); /* légèrement plus grand */
+    color: var(--primary);
+    white-space: nowrap; /* tient sur une seule ligne */
+    transition: all 0.5s ease;
+}
 
-        header {
-            padding: 90px 20px 20px; /* top augmenté pour descendre le h1 sous les boutons */
-            text-align: center;
-        }
+header.night h1 {
+    color: #ffd700;
+    text-shadow: 0 0 5px #ffd700, 0 0 10px #ffd700, 0 0 20px #ffd700;
+}
 
-        /* titre adaptatif sur une seule ligne */
-        header h1 {
-            margin: 0;
-            font-size: clamp(1.8rem, 5vw, 2.3rem); /* taille adaptable */
-            color: var(--primary);
-            white-space: nowrap; /* tient sur une seule ligne */
-        }
+.music-box {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    display: flex;
+    gap: 6px;
+    z-index: 1000;
+}
 
-        header.night h1 {
-            color: #ffd700;
-            text-shadow: 0 0 15px #ffd700;
-        }
+.music-box button {
+    padding: 8px 10px;
+    border-radius: 10px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    background: var(--btn-day);
+    color: white;
+    transition: all 0.3s ease;
+}
 
-        .music-box {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            display: flex;
-            gap: 6px;
-            z-index: 1000;
-        }
+body.night .music-box button {
+    background: #ffd700;
+    color: #000;
+    box-shadow: 0 0 10px #ffd700, 0 0 20px #ffd700;
+}
 
-        .music-box button {
-            padding: 8px 10px;
-            border-radius: 10px;
-            border: none;
-            font-weight: bold;
-            cursor: pointer;
-            background: var(--btn-day);
-            color: white;
-            transition: all 0.3s ease;
-        }
+.music-box select {
+    background: var(--btn-day);
+    color: #ffffff;
+    font-weight: normal;
+    border-radius: 12px;
+    border: 2px solid var(--btn-day);
+    padding: 8px 10px;
+    cursor: pointer;
+    transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease, color 0.3s ease;
+}
 
-        body.night .music-box button {
-            background: #ffd700;
-            color: #000;
-            box-shadow: 0 0 10px #ffd700, 0 0 20px #ffd700;
-        }
+body.night .music-box select {
+    background: #ffd700;
+    border-color: #ffd700;
+    color: #000;
+    box-shadow: 0 0 10px #ffd700, 0 0 20px #ffd700;
+}
 
-        .music-box select {
-            background: var(--btn-day);
-            color: #ffffff;
-            font-weight: normal;
-            border-radius: 12px;
-            border: 2px solid var(--btn-day);
-            padding: 8px 10px;
-            cursor: pointer;
-            transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
-        }
+.music-box select:hover {
+    transform: scale(1.05);
+}
 
-        .music-box select:hover {
-            transform: scale(1.05);
-        }
+main {
+    max-width: 900px;
+    margin: auto;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+}
 
-        main {
-            max-width: 900px;
-            margin: auto;
-            padding: 20px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 20px;
-        }
+.card {
+    background: var(--card);
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeIn 0.8s forwards;
+}
 
-        .card {
-            background: var(--card);
-            border-radius: 16px;
-            padding: 20px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeIn 0.8s forwards;
-        }
+@keyframes fadeIn {
+    to { opacity: 1; transform: translateY(0); }
+}
 
-        @keyframes fadeIn {
-            to { opacity: 1; transform: translateY(0); }
-        }
+.card h2, li {
+    font-family: 'Mountains of Christmas', cursive;
+}
 
-        .card h2, li {
-            font-family: 'Mountains of Christmas', cursive;
-        }
+.card h2 {
+    margin-top: 0;
+    color: var(--h2-color);
+    font-size: 1.6rem;
+    text-decoration: underline;
+    text-underline-offset: 6px;
+    text-decoration-thickness: 2px;
+}
 
-        .card h2 {
-            margin-top: 0;
-            color: var(--h2-color);
-            font-size: 1.6rem;
-            text-decoration: underline;
-            text-underline-offset: 6px;
-            text-decoration-thickness: 2px;
-        }
+body.night .card h2 {
+    color: #7CFC00;
+    text-shadow: 0 0 10px #7CFC00;
+}
 
-        body.night .card h2 {
-            color: #7CFC00;
-            text-shadow: 0 0 10px #7CFC00;
-        }
+ul { list-style: none; padding: 0; margin: 0; }
+li {
+    padding: 10px 0;
+    font-size: 1.2rem;
+    font-weight: 575;
+    color: #222;
+    border-bottom: 1px solid #ccc;
+}
 
-        ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
+body.night {
+    background: #0b0c12;
+    color: #eee;
+}
 
-        li {
-            padding: 10px 0;
-            font-size: 1.2rem;
-            font-weight: 575;
-            color: #222;
-            border-bottom: 1px solid #ccc;
-        }
+body.night .card {
+    background: #1a1c22;
+}
 
-        body.night {
-            background: #0b0c12;
-            color: #eee;
-        }
+body.night li {
+    color: #f5f5f5;
+    border-bottom: 1px solid #555;
+    font-weight: 550;
+}
 
-        body.night .card {
-            background: #1a1c22;
-        }
+.night-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 10px 15px;
+    border-radius: 12px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    background: var(--btn-day);
+    color: white;
+}
 
-        body.night li {
-            color: #f5f5f5;
-            border-bottom: 1px solid #555;
-            font-weight: 550;
-        }
+body.night .night-toggle {
+    background: var(--btn-night);
+    color: #000;
+}
 
-        .night-toggle {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 10px 15px;
-            border-radius: 12px;
-            border: none;
-            font-weight: bold;
-            cursor: pointer;
-            background: var(--btn-day);
-            color: white;
-        }
+.snowflake {
+    position: fixed;
+    top: -10px;
+    color: white;
+    opacity: 0.8;
+    animation: fall linear forwards;
+}
 
-        body.night .night-toggle {
-            background: var(--btn-night);
-            color: #000;
-        }
+@keyframes fall {
+    to { transform: translateY(100vh); }
+}
 
-        .snowflake {
-            position: fixed;
-            top: -10px;
-            color: white;
-            opacity: 0.8;
-            animation: fall linear forwards;
-        }
-
-        @keyframes fall {
-            to { transform: translateY(100vh); }
-        }
-
-        /* MOBILE : titre adaptatif */
-        @media (max-width: 600px) {
-            header h1 {
-                font-size: clamp(1.4rem, 5vw, 1.8rem);
-                white-space: nowrap;
-            }
-        }
-    </style>
+/* MOBILE : titre adaptatif */
+@media (max-width: 600px) {
+    header h1 {
+        font-size: clamp(1.6rem, 6vw, 2rem);
+        white-space: nowrap;
+    }
+}
+</style>
 </head>
-
 <body>
 
 <div class="music-box">
@@ -225,7 +223,6 @@
             <li>Pissaladière</li>
         </ul>
     </div>
-
     <div class="card">
         <h2>Plat 🍗</h2>
         <ul>
@@ -234,7 +231,6 @@
             <li>Côte de Boeuf et Capouns</li>
         </ul>
     </div>
-
     <div class="card">
         <h2>Dessert 🍰</h2>
         <ul>
@@ -244,7 +240,6 @@
             <li>Corbeille de fruits</li>
         </ul>
     </div>
-
     <div class="card">
         <h2>Boissons 🥂</h2>
         <ul>
@@ -260,50 +255,50 @@
 <audio id="music" loop></audio>
 
 <script>
-    function createSnowflake() {
-        const s = document.createElement("div");
-        s.className = "snowflake";
-        s.textContent = "❄";
-        s.style.left = Math.random() * window.innerWidth + "px";
-        s.style.fontSize = (10 + Math.random() * 16) + "px";
-        s.style.animationDuration = (6 + Math.random() * 6) + "s";
-        document.body.appendChild(s);
-        setTimeout(() => s.remove(), 12000);
-    }
-    setInterval(createSnowflake, 1200);
+function createSnowflake() {
+    const s = document.createElement("div");
+    s.className = "snowflake";
+    s.textContent = "❄";
+    s.style.left = Math.random() * window.innerWidth + "px";
+    s.style.fontSize = (10 + Math.random() * 16) + "px";
+    s.style.animationDuration = (6 + Math.random() * 6) + "s";
+    document.body.appendChild(s);
+    setTimeout(() => s.remove(), 12000);
+}
+setInterval(createSnowflake, 1200);
 
-    const nightBtn = document.getElementById("nightBtn");
-    const header = document.getElementById("header");
-    const music = document.getElementById("music");
-    const musicBtn = document.getElementById("musicBtn");
-    const musicSelect = document.getElementById("musicSelect");
-    let playing = false;
+const nightBtn = document.getElementById("nightBtn");
+const header = document.getElementById("header");
+const music = document.getElementById("music");
+const musicBtn = document.getElementById("musicBtn");
+const musicSelect = document.getElementById("musicSelect");
+let playing = false;
 
-    music.src = musicSelect.value;
+music.src = musicSelect.value;
 
-    musicBtn.addEventListener("click", () => {
-        if (playing) {
-            music.pause();
-            musicBtn.textContent = "▶️";
-        } else {
-            music.play();
-            musicBtn.textContent = "⏸️";
-        }
-        playing = !playing;
-    });
-
-    musicSelect.addEventListener("change", () => {
-        music.src = musicSelect.value;
+musicBtn.addEventListener("click", () => {
+    if (playing) {
+        music.pause();
+        musicBtn.textContent = "▶️";
+    } else {
         music.play();
         musicBtn.textContent = "⏸️";
-        playing = true;
-    });
+    }
+    playing = !playing;
+});
 
-    nightBtn.addEventListener("click", () => {
-        const night = document.body.classList.toggle("night");
-        header.classList.toggle("night");
-        nightBtn.textContent = night ? "☀️ Mode Jour" : "🌙 Mode Nuit";
-    });
+musicSelect.addEventListener("change", () => {
+    music.src = musicSelect.value;
+    music.play();
+    musicBtn.textContent = "⏸️";
+    playing = true;
+});
+
+nightBtn.addEventListener("click", () => {
+    const night = document.body.classList.toggle("night");
+    header.classList.toggle("night");
+    nightBtn.textContent = night ? "☀️ Mode Jour" : "🌙 Mode Nuit";
+});
 </script>
 
 </body>
