@@ -16,8 +16,6 @@
             --text: #333;
             --btn-day: #0b3d0b;
             --btn-night: #ffd700;
-            --bg-day: #f6f7f9;
-            --bg-night: #0b0c12;
         }
 
         body {
@@ -36,10 +34,12 @@
             text-align: center;
         }
 
+        /* ✅ Correction : titre adaptatif sur une seule ligne */
         header h1 {
             margin: 0;
-            font-size: 2.3rem;
+            font-size: clamp(1.8rem, 5vw, 2.3rem); /* taille adaptable */
             color: var(--primary);
+            white-space: nowrap; /* tient sur une seule ligne */
         }
 
         header.night h1 {
@@ -74,7 +74,6 @@
             box-shadow: 0 0 10px #ffd700, 0 0 20px #ffd700;
         }
 
-        /* 🎉 Menu déroulant musique */
         .music-box select {
             background: var(--btn-day);
             color: #ffffff;
@@ -137,7 +136,6 @@
             margin: 0;
         }
 
-        /* 🍽️ PLATS – PLUS SOMBRES & PLUS ÉPAIS */
         li {
             padding: 10px 0;
             font-size: 1.2rem;
@@ -147,7 +145,7 @@
         }
 
         body.night {
-            background: var(--bg-night);
+            background: #0b0c12;
             color: #eee;
         }
 
@@ -179,7 +177,6 @@
             color: #000;
         }
 
-        /* ❄️ Neige */
         .snowflake {
             position: fixed;
             top: -10px;
@@ -192,10 +189,11 @@
             to { transform: translateY(100vh); }
         }
 
+        /* 📱 MOBILE : titre adaptatif */
         @media (max-width: 600px) {
             header h1 {
-                font-size: 1.8rem;
-                margin-top: 20px;
+                font-size: clamp(1.4rem, 5vw, 1.8rem);
+                white-space: nowrap;
             }
         }
     </style>
@@ -263,7 +261,6 @@
 <audio id="music" loop></audio>
 
 <script>
-    /* ❄️ Neige */
     function createSnowflake() {
         const s = document.createElement("div");
         s.className = "snowflake";
@@ -276,17 +273,8 @@
     }
     setInterval(createSnowflake, 1200);
 
-    /* 🌙 Mode nuit */
     const nightBtn = document.getElementById("nightBtn");
     const header = document.getElementById("header");
-    nightBtn.addEventListener("click", () => {
-        const night = document.body.classList.toggle("night");
-        header.classList.toggle("night");
-        nightBtn.textContent = night ? "☀️ Mode Jour" : "🌙 Mode Nuit";
-        setTimeout(updateMusicSelectColor, 50);
-    });
-
-    /* 🎵 Musique */
     const music = document.getElementById("music");
     const musicBtn = document.getElementById("musicBtn");
     const musicSelect = document.getElementById("musicSelect");
@@ -310,33 +298,13 @@
         music.play();
         musicBtn.textContent = "⏸️";
         playing = true;
-        updateMusicSelectColor();
     });
 
-    /* 🎨 Couleur menu musique */
-    function updateMusicSelectColor() {
-        const isNight = document.body.classList.contains("night");
-
-        if (isNight) {
-            const titleColor = getComputedStyle(
-                document.querySelector("header h1")
-            ).color;
-
-            musicSelect.style.background = titleColor;
-            musicSelect.style.borderColor = titleColor;
-            musicSelect.style.boxShadow =
-                `0 0 10px ${titleColor}, 0 0 20px ${titleColor} inset`;
-            musicSelect.style.color = "#000";
-        } else {
-            musicSelect.style.background = "var(--btn-day)";
-            musicSelect.style.borderColor = "var(--btn-day)";
-            musicSelect.style.boxShadow =
-                "0 0 10px rgba(11,61,11,0.8), 0 0 20px rgba(11,61,11,0.6) inset";
-            musicSelect.style.color = "#ffffff";
-        }
-    }
-
-    updateMusicSelectColor();
+    nightBtn.addEventListener("click", () => {
+        const night = document.body.classList.toggle("night");
+        header.classList.toggle("night");
+        nightBtn.textContent = night ? "☀️ Mode Jour" : "🌙 Mode Nuit";
+    });
 </script>
 
 </body>
